@@ -1,0 +1,47 @@
+<body class="second-body">
+  <div class="container second-container">
+    <br>
+    {{!-- <div class="welcome-user"> --}}
+    {{!-- {{#if user}}
+      <h4 class="users-name">Hi {{name}}! Welcome back!</h4>
+      {{else}}
+      <p class="users-name">Hi {{name}}!</p>
+      {{/if}} --}}
+    {{!-- </div> --}}
+
+    <hr>
+
+    <div class="saved-restaurants">
+      {{#if newsArticle}}
+      <h6>News Articles:</h6>
+      {{#each newsArticle}}
+      <ul class="list-group">
+        {{!-- <li class="list-group-item d-flex justify-content-between"> --}}
+          {{!-- $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>"); --}}
+        <li>
+          <p data-id="{{this._id}}">{{this.title}} <br /> {{this.link}}</p>
+          {{!-- <p><span class="label">ID:</span> {{this.id}}</p>
+          <p><span class="label">Title:</span> {{this.title}}</p>
+          <p><span class="label">Link:</span> {{this.link}}</p> --}}
+        </li>
+        <hr>
+      </ul>
+      {{/each}}
+    </div>
+    {{else}}
+    <h6>There are currently no articles to display.</h6>
+    {{/if}}
+
+    <br>
+    {{!-- button takes user to home page --}}
+    {{!-- <a href="/" class="btn btn-outline-dark float-right exit">Exit</a> --}}
+
+    {{!-- button takes user to survey page --}}
+    {{!-- <button id="go-to-survey" type="button" class="btn btn-outline-dark float-right">Restaurant Finder Survey</button> --}}
+
+  </div>
+</body>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="/js/app.js"></script>
