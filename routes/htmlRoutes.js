@@ -6,8 +6,11 @@ module.exports = function (app) {
     // Load index page
     app.get("/", function (req, res) {
         // db.Example.findAll({}).then(function (dbExamples) {
-        res.render("index");
-        // });
+        // db.Article.find()
+        db.Article.find({ saved: false })
+            .sort({ date: -1 }).then(function (dbArticles) {
+                res.render("second", { newsArticle: dbArticles });
+            });
     });
 
     // A GET route for scraping the echoJS website
@@ -29,6 +32,9 @@ module.exports = function (app) {
                 result.link = $(this)
                     .children("a")
                     .attr("href");
+                result.summary = "Summary goes here";
+                result.saved = false;
+                result.date = new Date();
 
                 // Create a new Article using the `result` object built from scraping
                 db.Article.create(result)
@@ -56,7 +62,7 @@ module.exports = function (app) {
                 var news = [];
                 //{"_id":"5e4330a22aeae84b50e87e97","title":"FP: The good parts","link":"https://codingwithjs.rocks/blog/fp-the-good-parts","__v":0}
                 console.log(`First Article: ${dbArticle[0].title}\n${dbArticle[0].link}`)
-                var uData = {title:"Title 1",link:"http://somelink"};
+                var uData = { title: "Title 1", link: "http://somelink" };
 
                 // if (r.length === 0) {
                 //     uData = {
@@ -74,7 +80,7 @@ module.exports = function (app) {
                 //     };
                 // }
 
-                return res.render("second", {newsArticle: dbArticle});
+                return res.render("second", { newsArticle: dbArticle });
             })
             .catch(function (err) {
                 // If an error occurs, send the error back to the client
