@@ -1,10 +1,56 @@
 <body>
-  <div id="wrapper">
-    <h1>Note Scraper</h1>
-    <h2><i>Initial Page Placeholder</i></h2>
-    <div id="articles"></div>
-    <div id="notes"></div>
+  
+  <div>
+    <ul>
+      <li>
+        <a class="nav-link" href="/">Home
+          <span class="sr-only">(current)</span>
+        </a>
+      </li>
+      <li>
+        <a class="nav-link" href="/saved">Saved Articles</a>
+      </li>
+      <li>
+        <a class="btn scrape-new">SCRAPE NEW ARTICLES!</a>
+      </li>
+      <li>
+        <a class="btn clear">CLEAR ARTICLES!</a>
+      </li>
+    </ul>
   </div>
+
+  <div class="container-fluid article-container">
+  {{#each articles}}
+  <div data-_id="{{this._id}}" class="card">
+    <div class="card-header">
+      <h3>
+        <a class="article-link" target="_blank" rel="noopener noreferrer" href="{{this.url}}">{{this.headline}}</a>
+        <a class="btn btn-success save">Save Article</a>
+      </h3>
+    </div>
+    <div class="card-body">{{this.summary}}</div>
+  </div>
+  {{/each}} 
+  {{#unless articles.length}}
+  <div class='alert alert-warning text-center'>
+    <h4>No new articles to display.</h4>
+  </div>
+  <div class="card">
+    <div class="card-header text-center">
+      <h3>What Would You Like To Do?</h3>
+    </div>
+    <div class="card-body text-center">
+      <h4>
+        <a href="/scrape">Try Scraping New Articles</a>
+      </h4>
+      <h4>
+        <a href="/saved">Go to Saved Articles</a>
+      </h4>
+    </div>
+  </div>
+  {{/unless}}
+</div>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="app.js"></script>
+  <script src="/js/index.js"></script>
 </body>
